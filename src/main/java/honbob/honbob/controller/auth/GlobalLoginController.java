@@ -1,6 +1,6 @@
-package honbob.honbob.controller;
+package honbob.honbob.controller.auth;
 
-import honbob.honbob.dto.UserProfileRequest;
+import honbob.honbob.dto.auth.kakao.UserProfileRequest;
 import honbob.honbob.global.response.ResponseBody;
 import honbob.honbob.global.response.ResponseUtil;
 import honbob.honbob.service.member.MemberService;

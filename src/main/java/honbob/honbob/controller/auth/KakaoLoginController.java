@@ -1,6 +1,6 @@
-package honbob.honbob.controller;
+package honbob.honbob.controller.auth;
 
-import honbob.honbob.dto.UserLoginResponse;
+import honbob.honbob.dto.auth.kakao.UserLoginResponse;
 import honbob.honbob.global.exception.BusinessException;
 import honbob.honbob.global.exception.ExceptionType;
 import honbob.honbob.global.response.ResponseBody;
@@ -59,7 +59,7 @@ public class KakaoLoginController {
         log.info("result={}",loginResult);
         // 앱 딥링크 URL 생성 (스킴은 앱에 맞게 수정)
         String deepLink = String.format(
-                "exp://172.30.203.135:8081/?accessToken=%s&refreshToken=%s&nickname=%s&profileImageUrl=%s&isNewMember=%s",
+                "exp://172.21.80.1:8081/?accessToken=%s&refreshToken=%s&nickname=%s&profileImageUrl=%s&isNewMember=%s",
                 URLEncoder.encode(loginResult.getAccessToken(), StandardCharsets.UTF_8),
                 URLEncoder.encode(loginResult.getRefreshToken(), StandardCharsets.UTF_8),
                 URLEncoder.encode(loginResult.getNickname(), StandardCharsets.UTF_8),

@@ -1,6 +1,6 @@
 package honbob.honbob.domain;
 
-import honbob.honbob.dto.UserProfileRequest;
+import honbob.honbob.dto.auth.kakao.UserProfileRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

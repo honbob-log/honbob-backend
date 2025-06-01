@@ -2,7 +2,7 @@ package honbob.honbob.service.member;
 
 import honbob.honbob.domain.Member;
 
-import honbob.honbob.dto.UserProfileRequest;
+import honbob.honbob.dto.auth.kakao.UserProfileRequest;
 import honbob.honbob.global.exception.BusinessException;
 import honbob.honbob.global.exception.ExceptionType;
 import honbob.honbob.global.jwt.JwtUtil;

@@ -1,9 +1,9 @@
 package honbob.honbob.service.kakao;
 
 import honbob.honbob.domain.Member;
-import honbob.honbob.dto.kakao.KakaoTokenDto;
-import honbob.honbob.dto.kakao.KakaoUserInfoDto;
-import honbob.honbob.dto.UserLoginResponse;
+import honbob.honbob.dto.auth.kakao.KakaoTokenDto;
+import honbob.honbob.dto.auth.kakao.KakaoUserInfoDto;
+import honbob.honbob.dto.auth.kakao.UserLoginResponse;
 import honbob.honbob.global.exception.BusinessException;
 import honbob.honbob.global.exception.ExceptionType;
 import honbob.honbob.global.jwt.JwtUtil;

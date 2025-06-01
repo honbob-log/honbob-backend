@@ -1,4 +1,4 @@
-package honbob.honbob.dto;
+package honbob.honbob.dto.auth.kakao;
 
 import lombok.Getter;
 
