@@ -2,6 +2,7 @@ package honbob.honbob.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,13 @@ public class RecipeIngredient {
     @Column(nullable = false)
     private Integer amount;
 
+    @Builder
+    public RecipeIngredient(Ingredient ingredient, Integer amount){
+        this.ingredient = ingredient;
+        this.amount = amount;
+    }
+
+    public void assignRecipe(Recipe recipe){
+        this.recipe = recipe;
+    }
 }

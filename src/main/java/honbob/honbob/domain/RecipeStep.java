@@ -1,6 +1,7 @@
 package honbob.honbob.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,4 +24,14 @@ public class RecipeStep {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
+
+    @Builder
+    public RecipeStep(Integer stepOrder, String description, String imageUrl) {
+        this.stepOrder = stepOrder;
+        this.description = description;
+        this.imageUrl = imageUrl;
+    }
+    public void assignRecipe(Recipe recipe){
+        this.recipe = recipe;
+    }
 }

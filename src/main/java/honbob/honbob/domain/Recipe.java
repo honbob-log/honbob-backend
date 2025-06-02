@@ -1,6 +1,8 @@
 package honbob.honbob.domain;
 
+import honbob.honbob.dto.recipe.Difficulty;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,8 +27,10 @@ public class Recipe {
     @Column(nullable = false)
     private Integer cookTime;
 
-    @Column(nullable = false)
-    private String difficulty;
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
+
+    private Integer amount;
 
     @Column(nullable = false)
     private Integer viewCount = 0;
@@ -62,4 +66,31 @@ public class Recipe {
     
     @OneToMany(mappedBy = "recipe")
     private List<Review> reviewList = new ArrayList<>();
+
+    @Builder
+    public Recipe(String title, String description, Integer cookTime, Difficulty difficulty, Member member, Integer amount) {
+        this.title = title;
+        this.description = description;
+        this.cookTime = cookTime;
+        this.difficulty = difficulty;
+        this.member = member;
+        this.amount = amount;
+    }
+    public void addRecipeIngredient(RecipeIngredient recipeIngredient) {
+        // 1) 자식 객체(recipeIngredient)에 대한 recipe 설정
+        recipeIngredient.assignRecipe(this);
+        // 2) 이 Recipe 엔티티의 리스트에도 추가
+        this.recipeIngredientList.add(recipeIngredient);
+    }
+
+    public void addRecipeStep(RecipeStep recipeStep) {
+        recipeStep.assignRecipe(this);
+        this.recipeStepList.add(recipeStep);
+    }
+
+    public void addRecipeImage(RecipeImage recipeImage) {
+        recipeImage.assignRecipe(this);
+        this.recipeImageList.add(recipeImage);
+    }
+
 }

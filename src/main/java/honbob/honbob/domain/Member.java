@@ -4,13 +4,11 @@ import honbob.honbob.dto.auth.kakao.UserProfileRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 //TODO : OAuth 별 데이터 다른데 어떻게 통합할지 생각
 public class Member {

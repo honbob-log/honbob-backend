@@ -1,6 +1,7 @@
 package honbob.honbob.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,9 @@ public class Ingredient {
 
     @OneToMany(mappedBy = "ingredient")
     private List<RecipeIngredient> recipeIngredientList;
+
+    @Builder
+    public Ingredient(String name){
+        this.name = name;
+    }
 }
