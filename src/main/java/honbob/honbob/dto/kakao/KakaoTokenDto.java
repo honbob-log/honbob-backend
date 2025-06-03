@@ -1,4 +1,4 @@
-package honbob.honbob.dto;
+package honbob.honbob.dto.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

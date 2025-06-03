@@ -1,5 +1,6 @@
 package honbob.honbob.domain;
 
+import honbob.honbob.dto.UserProfileRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,26 +12,26 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+//TODO : OAuth 별 데이터 다른데 어떻게 통합할지 생각
 public class Member {
 
     @Id @GeneratedValue
     private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
 
     private String email;
 
     @Column
     private String password;
 
+    private String nickname;
 
     private String profileImage;
 
+    private String description;
+
     // 카카오 관련 필드 추가
     @Column(unique = true)
-    private Long kakaoId;
+    private Long authId;
 
     @Column
     private String refreshToken;
@@ -47,15 +48,9 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<UserIngredient> userIngredientList;
 
-    // 카카오 회원 생성 메서드
-    public static Member createKakaoMember(Long kakaoId, String name, String email, String profileImage, String refreshToken) {
-        Member member = new Member();
-        member.setKakaoId(kakaoId);
-        member.setName(name);
-        member.setEmail(email);
-        member.setProfileImage(profileImage);
-        member.setRefreshToken(refreshToken);
-        member.setPassword(""); // 소셜 로그인은 비밀번호가 없음
-        return member;
+    public void setMemberInfo(UserProfileRequest userProfileRequest){
+        this.profileImage = userProfileRequest.getProfileImageUrl();
+        this.description = userProfileRequest.getDescription();
+        this.nickname = userProfileRequest.getNickname();
     }
 }
