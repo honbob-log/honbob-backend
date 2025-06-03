@@ -28,7 +28,6 @@ import java.util.Collections;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @Override
@@ -49,16 +48,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
+        //TODO : 토큰 예외 처리 다양한 경우의 수 처리
         try {
             Long memberId = jwtUtil.extractMemberId(jwt);
 
             // memberId가 유효한지 확인
-            memberRepository.findById(memberId)
+            Member member = memberRepository.findById(memberId)
                     .orElseThrow(() -> new BusinessException(ExceptionType.MEMBER_NOT_FOUND));
 
             // Security Context에 인증 정보 설정
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    memberId, null, Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+                    member.getId(), null, Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 

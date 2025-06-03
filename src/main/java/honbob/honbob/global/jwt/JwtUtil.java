@@ -7,7 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
+import java.nio.charset.StandardCharsets;
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,7 +41,20 @@ public class JwtUtil {
     private SecretKey getSigningKey() {
         // 시크릿 키 생성 - 문자열을 바이트 배열로 변환하여 사용
         // HMAC-SHA 알고리즘은 적어도 256비트(32바이트) 이상의 키를 권장
-        byte[] keyBytes = secretKeyString.getBytes();
+        if (secretKeyString == null || secretKeyString.length() < 32) {
+            throw new IllegalStateException("JWT secret key must be at least 32 characters long");
+        }
+
+        byte[] keyBytes;
+        try {
+            // Base64로 인코딩된 키라면 디코딩 시도
+            keyBytes = Decoders.BASE64.decode(secretKeyString);
+        } catch (Exception e) {
+            keyBytes = secretKeyString.getBytes(StandardCharsets.UTF_8);
+        }
+        if (keyBytes.length < 32) {
+            throw new IllegalStateException("JWT secret key must be at least 256 bits (32 bytes)");
+        }
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
